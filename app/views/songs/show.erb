@@ -1,0 +1,15 @@
+<div class="container">
+<h1><%= @song.title %></h1>
+
+  <p>
+    Author: <%= @song.author %>
+  </p>
+
+  <p>
+    <a href="<%= @song.url  %>"> <%= @song.url  %></a>
+  </p>
+
+<hr/>
+  <a href="/songs">  <button class="btn btn-primary btn-lg" type="submit" name="action">Back to All Songs<i class="material-icons right"></i></button>
+</a>
+</div>

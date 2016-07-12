@@ -1,0 +1,20 @@
+<div class="container">
+<h1>All Songs</h1>
+<hr/>
+
+<% @songs.each do |song| %>
+  <div class="song">
+    <h3>
+      <a href="/songs/<%= song.id %>"><%= song.title %></a><small> (by: <%= song.author %>)</small>
+    </h3>
+    <p>
+     <a href="<%= song.url  %>"> <%= song.url  %></a>
+    </p>
+  </div>
+<% end %>
+
+<a href="/songs/new">
+  <button class="btn btn-primary btn-lg" type="submit" name="action">Add Song<i class="material-icons right"></i>
+  </button>
+</a>
+</div>
