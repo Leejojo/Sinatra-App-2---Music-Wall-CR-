@@ -48,7 +48,11 @@ end
 
 # new (form for new song)
 get '/songs/new' do
-  erb :'songs/new'
+  if session[:user_id]
+    erb :'songs/new'
+  else
+    redirect '/sign_up'
+  end
 end
 
 # show (individual song)
@@ -59,15 +63,20 @@ end
 
 # create (consumption of form submit)
 post '/songs' do
-  @song = Song.new(
-    title: params[:title],
-    author: params[:author],
-    url: params[:url]
-  )
-  if @song.save
-    redirect '/songs'
-  else 
-    erb :'songs/new'
+  if session[:user_id]
+    @song = Song.new(
+      title: params[:title],
+      author: params[:author],
+      url: params[:url],
+      user_id: session[:user_id]
+    )
+    if @song.save
+      redirect '/songs'
+    else 
+      erb :'songs/new'
+    end
+  else
+    redirect '/sign_up'
   end
 end
 
