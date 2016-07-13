@@ -21,11 +21,15 @@ post '/sign_up' do
   end
 end
 
-get '/users' do
+get '/users/sign_in' do
   erb :'/users/sign_in'
-  if session[:user_id]
-    @users = User.all
-    erb :'/songs/index'
+end
+
+post '/users/sign_in' do
+  user = User.find_by(username: params[:username], password: params[:password])
+  if user
+    session[:user_id] = user.id
+    redirect '/songs'
   else
     redirect '/sign_up'
   end
